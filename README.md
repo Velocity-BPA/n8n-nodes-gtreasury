@@ -1,6 +1,6 @@
 # n8n-nodes-gtreasury
 
-> [Velocity BPA Licensing Notice]
+> **[Velocity BPA Licensing Notice]**
 >
 > This n8n node is licensed under the Business Source License 1.1 (BSL 1.1).
 >
@@ -8,27 +8,31 @@
 >
 > For licensing information, visit https://velobpa.com/licensing or contact licensing@velobpa.com.
 
-A comprehensive n8n community node for integrating with the GTreasury Treasury Management System. This node provides complete access to GTreasury's enterprise treasury capabilities including cash management, payments, foreign exchange, investments, debt management, cash forecasting, bank connectivity, and ERP integration.
+This n8n community node provides seamless integration with GTreasury's treasury management platform. It offers 6 resources including Cash Position, Account, Payment, Foreign Exchange, Entity, and Counterparty management, enabling comprehensive treasury operations automation within your n8n workflows.
 
-![n8n](https://img.shields.io/badge/n8n-community--node-orange)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.4-blue)
+![n8n Community Node](https://img.shields.io/badge/n8n-Community%20Node-blue)
 ![License](https://img.shields.io/badge/license-BSL--1.1-blue)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.3-blue)
+![Treasury](https://img.shields.io/badge/Treasury-Management-green)
+![Cash Management](https://img.shields.io/badge/Cash-Management-orange)
+![Payments](https://img.shields.io/badge/Payments-Processing-purple)
 
 ## Features
 
-- **21 Resource Categories** covering the complete GTreasury API surface
-- **80+ Operations** for comprehensive treasury management automation
-- **40+ Webhook Event Types** for real-time event-driven workflows
-- **Multi-Authentication Support** (API Key, OAuth 2.0, Session Token)
-- **Bank Statement Parsing** (BAI2, MT940, camt.053 formats)
-- **ERP Integration** (Workday, NetSuite, Oracle, SAP, Microsoft Dynamics)
-- **ClearConnect Gateway** support for bank connectivity
+- **Cash Position Management** - Monitor and track cash positions across multiple accounts and entities
+- **Account Operations** - Create, update, and manage treasury accounts with full CRUD capabilities
+- **Payment Processing** - Execute and track payments with comprehensive status monitoring
+- **Foreign Exchange** - Handle FX transactions, rates, and currency conversions
+- **Entity Management** - Manage corporate entities and organizational structures
+- **Counterparty Operations** - Maintain counterparty relationships and transaction histories
+- **Real-time Data Sync** - Keep treasury data synchronized across systems
+- **Bulk Operations** - Process multiple transactions efficiently with batch operations
 
 ## Installation
 
 ### Community Nodes (Recommended)
 
-1. Open your n8n instance
+1. Open n8n
 2. Go to **Settings** → **Community Nodes**
 3. Click **Install a community node**
 4. Enter `n8n-nodes-gtreasury`
@@ -37,226 +41,175 @@ A comprehensive n8n community node for integrating with the GTreasury Treasury M
 ### Manual Installation
 
 ```bash
-cd ~/.n8n/custom
+cd ~/.n8n
 npm install n8n-nodes-gtreasury
 ```
 
 ### Development Installation
 
 ```bash
-# 1. Extract the zip file
-unzip n8n-nodes-gtreasury.zip
+git clone https://github.com/Velocity-BPA/n8n-nodes-gtreasury.git
 cd n8n-nodes-gtreasury
-
-# 2. Install dependencies
 npm install
-
-# 3. Build the project
 npm run build
-
-# 4. Create symlink to n8n custom nodes directory
-# For Linux/macOS:
 mkdir -p ~/.n8n/custom
 ln -s $(pwd) ~/.n8n/custom/n8n-nodes-gtreasury
-
-# For Windows (run as Administrator):
-# mklink /D %USERPROFILE%\.n8n\custom\n8n-nodes-gtreasury %CD%
-
-# 5. Restart n8n
 n8n start
 ```
 
 ## Credentials Setup
 
-### GTreasury API Credentials
-
-| Field | Description |
-|-------|-------------|
-| Base URL | GTreasury API endpoint (e.g., `https://api.gtreasury.com`) |
-| Tenant ID | Your GTreasury tenant identifier |
-| Auth Method | `apiKey`, `oauth2`, or `sessionToken` |
-| API Key | Required for API Key authentication |
-| Client ID | Required for OAuth 2.0 |
-| Client Secret | Required for OAuth 2.0 |
-| Username | Required for Session Token auth |
-| Password | Required for Session Token auth |
-
-### GTreasury ClearConnect Credentials
-
-| Field | Description |
-|-------|-------------|
-| Gateway URL | ClearConnect gateway endpoint |
-| Client Certificate | PEM-encoded client certificate |
-| Client Key | PEM-encoded private key |
-| CA Certificate | Certificate authority (optional) |
+| Field | Description | Required |
+|-------|-------------|----------|
+| API Key | Your GTreasury API key for authentication | Yes |
+| Server URL | GTreasury server endpoint URL | Yes |
+| Environment | Production or sandbox environment | Yes |
 
 ## Resources & Operations
 
-### Cash Management
-- Get Cash Position, Get Balance, List Transactions
-- Create Transaction, Execute ZBA Sweep, Get Pool Balance, Reconcile Account
+### 1. Cash Position
 
-### Bank Accounts
-- Create, Get, Update, Delete, List bank accounts
-- Manage Signatories (add, remove, list)
+| Operation | Description |
+|-----------|-------------|
+| Get | Retrieve cash position details by ID |
+| Get All | List all cash positions with optional filtering |
+| Create | Create a new cash position record |
+| Update | Update existing cash position information |
+| Delete | Remove a cash position record |
 
-### Bank Connectivity
-- Connect/Disconnect banks, Get Connection Status
-- Send/Receive Files, Get Real-time Balance
-- Parse Statements (BAI2, MT940, camt.053)
+### 2. Account
 
-### Payments
-- Create, Get, Update, Delete, List payments
-- Submit, Approve, Reject payments
-- Batch Operations (create, submit, get status)
+| Operation | Description |
+|-----------|-------------|
+| Get | Retrieve account details by ID |
+| Get All | List all accounts with optional filtering |
+| Create | Create a new treasury account |
+| Update | Update existing account information |
+| Delete | Remove an account record |
+| Get Balance | Retrieve current account balance |
 
-### Cash Forecasting
-- Get/Create/Update Forecasts
-- Variance Analysis, Import Data, Run Scenarios
+### 3. Payment
 
-### Investments
-- Portfolio Management, Holdings, Maturities
-- Record Transactions, Calculate Yield, Policy Compliance
+| Operation | Description |
+|-----------|-------------|
+| Get | Retrieve payment details by ID |
+| Get All | List all payments with optional filtering |
+| Create | Create a new payment transaction |
+| Update | Update existing payment information |
+| Delete | Cancel or remove a payment |
+| Submit | Submit payment for processing |
+| Get Status | Check payment processing status |
 
-### Debt Management
-- CRUD Debt Instruments, Record Draws/Payments
-- Covenant Compliance, Amortization Schedules
+### 4. Foreign Exchange
 
-### Foreign Exchange (FX)
-- Exposure Management, Deals, Quotes, Trading
-- Hedging, Mark-to-Market, Hedge Effectiveness
+| Operation | Description |
+|-----------|-------------|
+| Get | Retrieve FX transaction details by ID |
+| Get All | List all FX transactions with optional filtering |
+| Create | Create a new FX transaction |
+| Update | Update existing FX transaction |
+| Delete | Remove an FX transaction |
+| Get Rates | Retrieve current exchange rates |
+| Calculate | Calculate FX conversion amounts |
 
-### Intercompany
-- Netting Runs, Invoice Management, Settlement
+### 5. Entity
 
-### ERP Integration
-- GL Operations, AP/AR Sync, Field Mapping
-- Reconciliation (Workday, NetSuite, Oracle, SAP, Dynamics)
+| Operation | Description |
+|-----------|-------------|
+| Get | Retrieve entity details by ID |
+| Get All | List all entities with optional filtering |
+| Create | Create a new entity record |
+| Update | Update existing entity information |
+| Delete | Remove an entity record |
 
-### Bank Fee Analysis
-- Fee Summary, Service Charges, Bank Comparison
-- Trend Analysis, AFP Import
+### 6. Counterparty
 
-### Entity Management
-- CRUD Entities, Hierarchy Management
-
-### Counterparty Management
-- CRUD Counterparties, Credit Ratings, Exposure Management
-
-### Reporting
-- Generate Reports, Schedules, Templates
-- Dashboards, Export, History
-
-### Workflow Management
-- Task Management, Approvals, Reassignment
-- Escalation, Rules, Delegations
-
-### User Management
-- User CRUD, Roles, Permissions, Groups, Activity Tracking
-
-### Audit
-- Audit Trail, Compliance Reports, Data Access Logs
-- Retention Policies, Reconciliation Logs
-
-### Market Data
-- FX Rates, Interest Rates, Yield Curves
-- Commodities, Credit Spreads, Volatility, Subscriptions
-
-### Risk Management
-- Exposure Analysis, VaR Calculation, Counterparty Risk
-- Stress Testing, Limits, Scenarios, Sensitivity Analysis
-
-### GSmart AI
-- Forecasting, Anomaly Detection, Recommendations
-- Pattern Analysis, Optimization, Model Training
-
-### Utility
-- System Status, Validation (Bank Account, IBAN)
-- Currency Conversion, Business Days, SWIFT Lookup
-
-## Trigger Node
-
-The **GTreasury Trigger** node supports 40+ webhook event types:
-
-- **Cash Events**: balance_updated, transaction_created, position_changed
-- **Payment Events**: created, approved, rejected, executed, failed
-- **FX Events**: deal_created, deal_executed, rate_alert
-- **Investment Events**: maturity_approaching, transaction_recorded
-- **Debt Events**: payment_due, covenant_breach
-- **Bank Events**: statement_received, connection_status_changed
-- **Forecast Events**: variance_detected, forecast_updated
-- **And many more...**
+| Operation | Description |
+|-----------|-------------|
+| Get | Retrieve counterparty details by ID |
+| Get All | List all counterparties with optional filtering |
+| Create | Create a new counterparty record |
+| Update | Update existing counterparty information |
+| Delete | Remove a counterparty record |
+| Get Transactions | Retrieve transaction history for counterparty |
 
 ## Usage Examples
 
-### Get Cash Position
 ```javascript
-// Configure GTreasury node
-Resource: Cash Management
-Operation: Get Cash Position
-Entity ID: "CORP-001"
-As Of Date: "2024-01-15"
-Include Forecasted: true
+// Get cash positions for a specific entity
+{
+  "resource": "cashPosition",
+  "operation": "getAll",
+  "filters": {
+    "entityId": "ENT001",
+    "currency": "USD",
+    "asOfDate": "2024-01-15"
+  }
+}
 ```
 
-### Create Payment
 ```javascript
-// Configure GTreasury node
-Resource: Payment
-Operation: Create Payment
-Payment Type: "wire"
-Amount: 50000
-Currency: "USD"
-Beneficiary Account: "123456789"
-Value Date: "2024-01-20"
+// Create a new payment transaction
+{
+  "resource": "payment",
+  "operation": "create",
+  "paymentData": {
+    "amount": 50000.00,
+    "currency": "USD",
+    "fromAccount": "ACC001",
+    "toAccount": "ACC002",
+    "counterpartyId": "CP001",
+    "valueDate": "2024-01-20",
+    "reference": "INV-2024-001"
+  }
+}
 ```
 
-### Parse Bank Statement
 ```javascript
-// Configure GTreasury node
-Resource: Bank Connectivity
-Operation: Parse Statement
-Format: "BAI2"
-Statement Data: {{ $json.statementContent }}
+// Get current FX rates for currency pair
+{
+  "resource": "foreignExchange",
+  "operation": "getRates",
+  "parameters": {
+    "baseCurrency": "USD",
+    "targetCurrency": "EUR",
+    "rateType": "spot"
+  }
+}
+```
+
+```javascript
+// Update counterparty information
+{
+  "resource": "counterparty",
+  "operation": "update",
+  "counterpartyId": "CP001",
+  "updateData": {
+    "name": "Updated Counterparty Name",
+    "status": "active",
+    "paymentTerms": "NET30"
+  }
+}
 ```
 
 ## Error Handling
 
-The node includes comprehensive error handling:
-
-- **Authentication Errors**: Token refresh for OAuth 2.0
-- **Rate Limiting**: Automatic retry with backoff
-- **Validation Errors**: Detailed field-level error messages
-- **Network Errors**: Connection retry logic
-
-## Security Best Practices
-
-1. Store credentials securely using n8n's credential management
-2. Use OAuth 2.0 when available for enhanced security
-3. Rotate API keys regularly
-4. Use minimum required permissions for service accounts
-5. Enable audit logging in GTreasury
-6. Use ClearConnect with mTLS for bank connectivity
+| Error | Description | Solution |
+|-------|-------------|----------|
+| Invalid API Key | Authentication failed with provided credentials | Verify API key is correct and active |
+| Insufficient Permissions | User lacks permissions for requested operation | Contact administrator to grant required permissions |
+| Record Not Found | Requested resource ID does not exist | Verify the ID exists and is accessible |
+| Validation Error | Required fields missing or invalid data format | Check required fields and data types |
+| Rate Limit Exceeded | Too many requests sent to API | Implement delay between requests |
+| Server Error | GTreasury service temporarily unavailable | Retry request after brief delay |
 
 ## Development
 
 ```bash
-# Run unit tests
-npm test
-
-# Run tests with coverage
-npm run test:coverage
-
-# Run linting
-npm run lint
-
-# Fix linting issues
-npm run lint:fix
-
-# Build the project
+npm install
 npm run build
-
-# Watch mode for development
+npm test
+npm run lint
 npm run dev
 ```
 
@@ -274,32 +227,23 @@ This n8n community node is licensed under the **Business Source License 1.1**.
 Permitted for personal, educational, research, and internal business use.
 
 ### Commercial Use
-Use of this node within any SaaS, PaaS, hosted platform, managed service,
-or paid automation offering requires a commercial license.
+Use of this node within any SaaS, PaaS, hosted platform, managed service, or paid automation offering requires a commercial license.
 
-For licensing inquiries:
-**licensing@velobpa.com**
+For licensing inquiries: **licensing@velobpa.com**
 
 See [LICENSE](LICENSE), [COMMERCIAL_LICENSE.md](COMMERCIAL_LICENSE.md), and [LICENSING_FAQ.md](LICENSING_FAQ.md) for details.
 
 ## Contributing
 
-We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+Contributions are welcome! Please ensure:
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Run tests: `npm test`
-5. Submit a pull request
+1. Code follows existing style conventions
+2. All tests pass (`npm test`)
+3. Linting passes (`npm run lint`)
+4. Documentation is updated for new features
+5. Commit messages are descriptive
 
 ## Support
 
-- **Documentation**: [GTreasury API Docs](https://docs.gtreasury.com)
 - **Issues**: [GitHub Issues](https://github.com/Velocity-BPA/n8n-nodes-gtreasury/issues)
-- **Commercial Support**: licensing@velobpa.com
-
-## Acknowledgments
-
-- [GTreasury](https://gtreasury.com) for their comprehensive treasury management platform
-- [n8n](https://n8n.io) for the workflow automation framework
-- The n8n community for inspiration and support
+- **GTreasury Documentation**: [GTreasury API Documentation](https://www.gtreasury.com/developers)
