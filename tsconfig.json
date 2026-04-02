@@ -1,50 +1,34 @@
 {
   "compilerOptions": {
-    "target": "ES2021",
+    "target": "es2019",
+    "lib": [
+      "es2019"
+    ],
     "module": "commonjs",
-    "lib": ["ES2021"],
-    "declaration": true,
-    "declarationMap": true,
-    "sourceMap": true,
     "outDir": "./dist",
-    "rootDir": ".",
-    "strict": false,
-    "noImplicitAny": false,
-    "strictNullChecks": false,
-    "strictFunctionTypes": false,
-    "strictBindCallApply": false,
-    "strictPropertyInitialization": false,
-    "noImplicitThis": false,
-    "useUnknownInCatchVariables": false,
-    "alwaysStrict": false,
-    "noUnusedLocals": false,
-    "noUnusedParameters": false,
-    "exactOptionalPropertyTypes": false,
-    "noImplicitReturns": false,
-    "noFallthroughCasesInSwitch": false,
-    "noUncheckedIndexedAccess": false,
-    "noImplicitOverride": false,
-    "noPropertyAccessFromIndexSignature": false,
+    "rootDir": "./",
+    "removeComments": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
     "moduleResolution": "node",
-    "baseUrl": ".",
-    "paths": {
-      "*": ["./node_modules/*"]
-    },
+    "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
-    "isolatedModules": true
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
   },
   "include": [
-    "nodes/**/*.ts",
-    "credentials/**/*.ts"
+    "nodes/**/*",
+    "credentials/**/*"
   ],
   "exclude": [
     "node_modules",
-    "dist",
-    "test",
-    "**/*.spec.ts",
-    "**/*.test.ts"
+    "dist"
   ]
 }
