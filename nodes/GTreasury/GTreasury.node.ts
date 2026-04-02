@@ -118,6 +118,16 @@ export class GTreasury implements INodeType {
 						description: 'Cash positions, balances, and transactions',
 					},
 					{
+						name: 'Cash Position',
+						value: 'cashPosition',
+						description: 'Cash position management and tracking',
+					},
+					{
+						name: 'Account',
+						value: 'account',
+						description: 'Account operations and management',
+					},
+					{
 						name: 'Counterparty',
 						value: 'counterparty',
 						description: 'Counterparty and vendor management',
@@ -141,6 +151,11 @@ export class GTreasury implements INodeType {
 						name: 'FX',
 						value: 'fx',
 						description: 'Foreign exchange and hedging',
+					},
+					{
+						name: 'Foreign Exchange',
+						value: 'foreignExchange',
+						description: 'Foreign exchange transactions and rates',
 					},
 					{
 						name: 'GSmart AI',
@@ -254,6 +269,79 @@ export class GTreasury implements INodeType {
 					},
 				],
 				default: 'getCashPosition',
+			},
+
+			// =====================================================
+			// CASH POSITION OPERATIONS
+			// =====================================================
+			{
+				displayName: 'Operation',
+				name: 'operation',
+				type: 'options',
+				noDataExpression: true,
+				displayOptions: { show: { resource: ['cashPosition'] } },
+				options: [
+					{ name: 'Get All Cash Positions', value: 'getAllCashPositions', description: 'Retrieve all cash positions', action: 'Get all cash positions' },
+					{ name: 'Get Cash Position', value: 'getCashPosition', description: 'Get specific cash position', action: 'Get cash position' },
+					{ name: 'Create Cash Position', value: 'createCashPosition', description: 'Create new cash position entry', action: 'Create cash position' },
+					{ name: 'Update Cash Position', value: 'updateCashPosition', description: 'Update existing cash position', action: 'Update cash position' },
+					{ name: 'Delete Cash Position', value: 'deleteCashPosition', description: 'Remove cash position entry', action: 'Delete cash position' }
+				],
+				default: 'getAllCashPositions',
+			},
+
+			// =====================================================
+			// ACCOUNT OPERATIONS
+			// =====================================================
+			{
+				displayName: 'Operation',
+				name: 'operation',
+				type: 'options',
+				noDataExpression: true,
+				displayOptions: {
+					show: {
+						resource: ['account'],
+					},
+				},
+				options: [
+					{
+						name: 'Get All Accounts',
+						value: 'getAllAccounts',
+						description: 'Retrieve all accounts',
+						action: 'Get all accounts',
+					},
+					{
+						name: 'Get Account',
+						value: 'getAccount',
+						description: 'Get specific account details',
+						action: 'Get an account',
+					},
+					{
+						name: 'Create Account',
+						value: 'createAccount',
+						description: 'Create new bank account',
+						action: 'Create an account',
+					},
+					{
+						name: 'Update Account',
+						value: 'updateAccount',
+						description: 'Update account information',
+						action: 'Update an account',
+					},
+					{
+						name: 'Delete Account',
+						value: 'deleteAccount',
+						description: 'Close/remove account',
+						action: 'Delete an account',
+					},
+					{
+						name: 'Get Account Balances',
+						value: 'getAccountBalances',
+						description: 'Get account balance history',
+						action: 'Get account balances',
+					},
+				],
+				default: 'getAllAccounts',
 			},
 
 			// =====================================================
@@ -391,6 +479,48 @@ export class GTreasury implements INodeType {
 				},
 				options: [
 					{
+						name: 'Get All Payments',
+						value: 'getAllPayments',
+						description: 'Retrieve all payments',
+						action: 'Get all payments',
+					},
+					{
+						name: 'Get Payment',
+						value: 'getPayment',
+						description: 'Get specific payment details',
+						action: 'Get a payment',
+					},
+					{
+						name: 'Create Payment',
+						value: 'createPayment',
+						description: 'Initiate new payment',
+						action: 'Create a payment',
+					},
+					{
+						name: 'Update Payment',
+						value: 'updatePayment',
+						description: 'Modify payment details',
+						action: 'Update a payment',
+					},
+					{
+						name: 'Cancel Payment',
+						value: 'cancelPayment',
+						description: 'Cancel pending payment',
+						action: 'Cancel a payment',
+					},
+					{
+						name: 'Approve Payment',
+						value: 'approvePayment',
+						description: 'Approve payment for processing',
+						action: 'Approve a payment',
+					},
+					{
+						name: 'Create Bulk Payments',
+						value: 'createBulkPayments',
+						description: 'Create multiple payments',
+						action: 'Create bulk payments',
+					},
+					{
 						name: 'Create',
 						value: 'create',
 						description: 'Create a new payment',
@@ -457,7 +587,67 @@ export class GTreasury implements INodeType {
 						action: 'Release payment batch',
 					},
 				],
-				default: 'getMany',
+				default: 'getAllPayments',
+			},
+
+			// =====================================================
+			// FOREIGN EXCHANGE OPERATIONS
+			// =====================================================
+			{
+				displayName: 'Operation',
+				name: 'operation',
+				type: 'options',
+				noDataExpression: true,
+				displayOptions: {
+					show: {
+						resource: ['foreignExchange'],
+					},
+				},
+				options: [
+					{
+						name: 'Get All FX Transactions',
+						value: 'getAllFxTransactions',
+						description: 'Retrieve FX transactions',
+						action: 'Get all FX transactions',
+					},
+					{
+						name: 'Get FX Transaction',
+						value: 'getFxTransaction',
+						description: 'Get specific FX transaction',
+						action: 'Get FX transaction',
+					},
+					{
+						name: 'Create FX Transaction',
+						value: 'createFxTransaction',
+						description: 'Create new FX transaction',
+						action: 'Create FX transaction',
+					},
+					{
+						name: 'Update FX Transaction',
+						value: 'updateFxTransaction',
+						description: 'Update FX transaction',
+						action: 'Update FX transaction',
+					},
+					{
+						name: 'Delete FX Transaction',
+						value: 'deleteFxTransaction',
+						description: 'Cancel FX transaction',
+						action: 'Delete FX transaction',
+					},
+					{
+						name: 'Get Current FX Rates',
+						value: 'getCurrentFxRates',
+						description: 'Get current exchange rates',
+						action: 'Get current FX rates',
+					},
+					{
+						name: 'Get Historical FX Rates',
+						value: 'getHistoricalFxRates',
+						description: 'Get historical rates',
+						action: 'Get historical FX rates',
+					},
+				],
+				default: 'getAllFxTransactions',
 			},
 
 			// =====================================================
@@ -906,12 +1096,44 @@ export class GTreasury implements INodeType {
 				name: 'operation',
 				type: 'options',
 				noDataExpression: true,
-				displayOptions: {
-					show: {
-						resource: ['entity'],
-					},
-				},
+				displayOptions: { show: { resource: ['entity'] } },
 				options: [
+					{
+						name: 'Get All Entities',
+						value: 'getAllEntities',
+						description: 'Retrieve all entities',
+						action: 'Get all entities',
+					},
+					{
+						name: 'Get Entity',
+						value: 'getEntity',
+						description: 'Get specific entity details',
+						action: 'Get an entity',
+					},
+					{
+						name: 'Create Entity',
+						value: 'createEntity',
+						description: 'Create new entity',
+						action: 'Create an entity',
+					},
+					{
+						name: 'Update Entity',
+						value: 'updateEntity',
+						description: 'Update entity information',
+						action: 'Update an entity',
+					},
+					{
+						name: 'Delete Entity',
+						value: 'deleteEntity',
+						description: 'Remove entity',
+						action: 'Delete an entity',
+					},
+					{
+						name: 'Get Entity Hierarchy',
+						value: 'getEntityHierarchy',
+						description: 'Get entity structure',
+						action: 'Get entity hierarchy',
+					},
 					{
 						name: 'Create',
 						value: 'create',
@@ -949,7 +1171,7 @@ export class GTreasury implements INodeType {
 						action: 'Get hierarchy',
 					},
 				],
-				default: 'getMany',
+				default: 'getAllEntities',
 			},
 
 			// =====================================================
@@ -960,12 +1182,44 @@ export class GTreasury implements INodeType {
 				name: 'operation',
 				type: 'options',
 				noDataExpression: true,
-				displayOptions: {
-					show: {
-						resource: ['counterparty'],
-					},
-				},
+				displayOptions: { show: { resource: ['counterparty'] } },
 				options: [
+					{
+						name: 'Get All Counterparties',
+						value: 'getAllCounterparties',
+						description: 'Retrieve all counterparties',
+						action: 'Get all counterparties',
+					},
+					{
+						name: 'Get Counterparty',
+						value: 'getCounterparty',
+						description: 'Get specific counterparty',
+						action: 'Get a counterparty',
+					},
+					{
+						name: 'Create Counterparty',
+						value: 'createCounterparty',
+						description: 'Create new counterparty',
+						action: 'Create a counterparty',
+					},
+					{
+						name: 'Update Counterparty',
+						value: 'updateCounterparty',
+						description: 'Update counterparty details',
+						action: 'Update a counterparty',
+					},
+					{
+						name: 'Delete Counterparty',
+						value: 'deleteCounterparty',
+						description: 'Remove counterparty',
+						action: 'Delete a counterparty',
+					},
+					{
+						name: 'Get Counterparty Limits',
+						value: 'getCounterpartyLimits',
+						description: 'Get exposure limits',
+						action: 'Get counterparty limits',
+					},
 					{
 						name: 'Create',
 						value: 'create',
@@ -1009,7 +1263,7 @@ export class GTreasury implements INodeType {
 						action: 'Verify bank details',
 					},
 				],
-				default: 'getMany',
+				default: 'getAllCounterparties',
 			},
 
 			// =====================================================
@@ -1444,12 +1698,28 @@ export class GTreasury implements INodeType {
 				required: true,
 				displayOptions: {
 					show: {
-						resource: ['cashManagement', 'bankAccount'],
-						operation: ['getBalance', 'get', 'update', 'delete', 'reconcileAccount', 'getSignatories', 'updateSignatories'],
+						resource: ['cashManagement', 'bankAccount', 'account'],
+						operation: ['getBalance', 'get', 'update', 'delete', 'reconcileAccount', 'getSignatories', 'updateSignatories', 'getAccount', 'updateAccount', 'deleteAccount', 'getAccountBalances'],
 					},
 				},
 				default: '',
 				description: 'The ID of the bank account',
+			},
+
+			// Cash Position ID
+			{
+				displayName: 'Cash Position ID',
+				name: 'cashPositionId',
+				type: 'string',
+				required: true,
+				displayOptions: {
+					show: {
+						resource: ['cashPosition'],
+						operation: ['getCashPosition', 'updateCashPosition', 'deleteCashPosition']
+					}
+				},
+				default: '',
+				description: 'The ID of the cash position',
 			},
 
 			// Entity ID field
@@ -1460,8 +1730,8 @@ export class GTreasury implements INodeType {
 				required: true,
 				displayOptions: {
 					show: {
-						resource: ['entity', 'cashManagement'],
-						operation: ['get', 'update', 'delete', 'getCashPosition', 'getPoolBalance'],
+						resource: ['entity', 'cashManagement', 'account', 'cashPosition', 'payment'],
+						operation: ['get', 'update', 'delete', 'getCashPosition', 'getPoolBalance', 'getEntity', 'updateEntity', 'deleteEntity', 'getEntityHierarchy', 'getAllAccounts', 'createAccount', 'getAllCashPositions', 'createCashPosition', 'getAllPayments'],
 					},
 				},
 				default: '',
@@ -1477,7 +1747,23 @@ export class GTreasury implements INodeType {
 				displayOptions: {
 					show: {
 						resource: ['payment'],
-						operation: ['get', 'update', 'delete', 'approve', 'reject', 'submit', 'getStatus'],
+						operation: ['get', 'update', 'delete', 'approve', 'reject', 'submit', 'getStatus', 'getPayment', 'updatePayment', 'cancelPayment', 'approvePayment'],
+					},
+				},
+				default: '',
+				description: 'The ID of the payment',
+			},
+
+			// Payment ID field (using 'id' parameter name for generated operations)
+			{
+				displayName: 'Payment ID',
+				name: 'id',
+				type: 'string',
+				required: true,
+				displayOptions: {
+					show: {
+						resource: ['payment'],
+						operation: ['getPayment', 'updatePayment', 'cancelPayment', 'approvePayment'],
 					},
 				},
 				default: '',
@@ -1491,8 +1777,8 @@ export class GTreasury implements INodeType {
 				type: 'dateTime',
 				displayOptions: {
 					show: {
-						resource: ['cashManagement', 'cashForecasting', 'reporting', 'audit'],
-						operation: ['listTransactions', 'getForecast', 'getVariance', 'runReport', 'getAuditLog', 'searchAuditLog'],
+						resource: ['cashManagement', 'cashForecasting', 'reporting', 'audit', 'account', 'foreignExchange'],
+						operation: ['listTransactions', 'getForecast', 'getVariance', 'runReport', 'getAuditLog', 'searchAuditLog', 'getAccountBalances', 'getHistoricalFxRates'],
 					},
 				},
 				default: '',
@@ -1504,12 +1790,27 @@ export class GTreasury implements INodeType {
 				type: 'dateTime',
 				displayOptions: {
 					show: {
-						resource: ['cashManagement', 'cashForecasting', 'reporting', 'audit'],
-						operation: ['listTransactions', 'getForecast', 'getVariance', 'runReport', 'getAuditLog', 'searchAuditLog'],
+						resource: ['cashManagement', 'cashForecasting', 'reporting', 'audit', 'account', 'foreignExchange'],
+						operation: ['listTransactions', 'getForecast', 'getVariance', 'runReport', 'getAuditLog', 'searchAuditLog', 'getAccountBalances', 'getHistoricalFxRates'],
 					},
 				},
 				default: '',
 				description: 'End date for the query',
+			},
+
+			// Date field for cash position
+			{
+				displayName: 'Date',
+				name: 'date',
+				type: 'dateTime',
+				displayOptions: {
+					show: {
+						resource: ['cashPosition'],
+						operation: ['getAllCashPositions', 'createCashPosition', 'updateCashPosition']
+					}
+				},
+				default: '',
+				description: 'Date for cash position (ISO 8601 format: YYYY-MM-DD)',
 			},
 
 			// Currency field
@@ -1519,8 +1820,8 @@ export class GTreasury implements INodeType {
 				type: 'string',
 				displayOptions: {
 					show: {
-						resource: ['cashManagement', 'payment', 'fx', 'investment'],
-						operation: ['getCashPosition', 'create', 'getExposure', 'getQuote', 'createInvestment'],
+						resource: ['cashManagement', 'payment', 'fx', 'investment', 'cashPosition', 'account', 'entity', 'counterparty'],
+						operation: ['getCashPosition', 'create', 'getExposure', 'getQuote', 'createInvestment', 'getAllCashPositions', 'createCashPosition', 'updateCashPosition', 'createAccount', 'createPayment', 'getAllEntities', 'createEntity', 'updateEntity', 'getAllCounterparties'],
 					},
 				},
 				default: 'USD',
@@ -1537,12 +1838,31 @@ export class GTreasury implements INodeType {
 				},
 				displayOptions: {
 					show: {
-						resource: ['payment', 'cashManagement', 'fx', 'investment', 'debt'],
-						operation: ['create', 'createTransaction', 'createDeal', 'executeTrade', 'createInvestment', 'recordDraw', 'recordPayment'],
+						resource: ['payment', 'cashManagement', 'fx', 'investment', 'debt', 'cashPosition', 'foreignExchange'],
+						operation: ['create', 'createTransaction', 'createDeal', 'executeTrade', 'createInvestment', 'recordDraw', 'recordPayment', 'createCashPosition', 'updateCashPosition', 'createPayment', 'updatePayment', 'createFxTransaction', 'updateFxTransaction'],
 					},
 				},
+				required: true,
 				default: 0,
 				description: 'Transaction amount',
+			},
+
+			// Special amount fields for payment
+			{
+				displayName: 'Minimum Amount',
+				name: 'amount_min',
+				type: 'number',
+				displayOptions: { show: { resource: ['payment'], operation: ['getAllPayments'] } },
+				default: 0,
+				description: 'Filter payments by minimum amount',
+			},
+			{
+				displayName: 'Maximum Amount',
+				name: 'amount_max',
+				type: 'number',
+				displayOptions: { show: { resource: ['payment'], operation: ['getAllPayments'] } },
+				default: 0,
+				description: 'Filter payments by maximum amount',
 			},
 
 			// Connection ID for bank connectivity
@@ -1646,6 +1966,22 @@ export class GTreasury implements INodeType {
 				description: 'The FX deal ID',
 			},
 
+			// Transaction ID for FX
+			{
+				displayName: 'Transaction ID',
+				name: 'transactionId',
+				type: 'string',
+				required: true,
+				default: '',
+				displayOptions: {
+					show: {
+						resource: ['foreignExchange'],
+						operation: ['getFxTransaction', 'updateFxTransaction', 'deleteFxTransaction'],
+					},
+				},
+				description: 'The ID of the FX transaction',
+			},
+
 			// Currency pair for FX
 			{
 				displayName: 'Currency Pair',
@@ -1662,648 +1998,42 @@ export class GTreasury implements INodeType {
 				description: 'Currency pair (e.g., EUR/USD)',
 			},
 
-			// Netting Cycle ID
+			// Base and target currencies for FX
 			{
-				displayName: 'Netting Cycle ID',
-				name: 'nettingCycleId',
+				displayName: 'Base Currency',
+				name: 'baseCurrency',
 				type: 'string',
-				required: true,
-				displayOptions: {
-					show: {
-						resource: ['intercompany'],
-						operation: ['getNettingPosition', 'executeSettlement', 'getSettlementReport'],
-					},
-				},
+				required: false,
 				default: '',
-				description: 'The netting cycle ID',
-			},
-
-			// ERP System selection
-			{
-				displayName: 'ERP System',
-				name: 'erpSystem',
-				type: 'options',
 				displayOptions: {
 					show: {
-						resource: ['erpIntegration'],
+						resource: ['foreignExchange'],
+						operation: ['getAllFxTransactions', 'createFxTransaction', 'getCurrentFxRates', 'getHistoricalFxRates'],
 					},
 				},
-				options: [
-					{ name: 'Workday', value: 'WORKDAY' },
-					{ name: 'NetSuite', value: 'NETSUITE' },
-					{ name: 'Oracle Cloud', value: 'ORACLE' },
-					{ name: 'SAP S/4HANA', value: 'SAP' },
-					{ name: 'Microsoft Dynamics 365', value: 'DYNAMICS' },
-					{ name: 'Sage Intacct', value: 'SAGE_INTACCT' },
-					{ name: 'QuickBooks', value: 'QUICKBOOKS' },
-					{ name: 'Xero', value: 'XERO' },
-					{ name: 'Other', value: 'OTHER' },
-				],
-				default: 'WORKDAY',
-				description: 'The ERP system to integrate with',
+				description: 'Base currency code (e.g., USD)',
 			},
-
-			// Report ID
 			{
-				displayName: 'Report ID',
-				name: 'reportId',
+				displayName: 'Target Currency',
+				name: 'targetCurrency',
 				type: 'string',
-				required: true,
-				displayOptions: {
-					show: {
-						resource: ['reporting'],
-						operation: ['getReport', 'runReport', 'scheduleReport', 'exportReport'],
-					},
-				},
+				required: false,
 				default: '',
-				description: 'The report ID',
-			},
-
-			// Workflow Item ID
-			{
-				displayName: 'Workflow Item ID',
-				name: 'workflowItemId',
-				type: 'string',
-				required: true,
 				displayOptions: {
 					show: {
-						resource: ['workflow'],
-						operation: ['approveItem', 'rejectItem', 'getWorkflowHistory', 'reassignItem'],
+						resource: ['foreignExchange'],
+						operation: ['getAllFxTransactions', 'createFxTransaction', 'getHistoricalFxRates'],
 					},
 				},
+				description: 'Target currency code (e.g., EUR)',
+			},
+			{
+				displayName: 'Target Currencies',
+				name: 'targetCurrencies',
+				type: 'string',
+				required: false,
 				default: '',
-				description: 'The workflow item ID',
-			},
-
-			// User ID
-			{
-				displayName: 'User ID',
-				name: 'userId',
-				type: 'string',
-				required: true,
 				displayOptions: {
 					show: {
-						resource: ['userManagement'],
-						operation: ['getUser', 'updateUser', 'deactivateUser', 'assignRole'],
-					},
-				},
-				default: '',
-				description: 'The user ID',
-			},
-
-			// Counterparty ID
-			{
-				displayName: 'Counterparty ID',
-				name: 'counterpartyId',
-				type: 'string',
-				required: true,
-				displayOptions: {
-					show: {
-						resource: ['counterparty', 'riskManagement'],
-						operation: ['get', 'update', 'delete', 'getBankDetails', 'verifyBankDetails', 'getCounterpartyRisk'],
-					},
-				},
-				default: '',
-				description: 'The counterparty ID',
-			},
-
-			// IBAN field
-			{
-				displayName: 'IBAN',
-				name: 'iban',
-				type: 'string',
-				displayOptions: {
-					show: {
-						resource: ['utility'],
-						operation: ['validateIban'],
-					},
-				},
-				default: '',
-				placeholder: 'DE89370400440532013000',
-				description: 'The IBAN to validate',
-			},
-
-			// BIC field
-			{
-				displayName: 'BIC/SWIFT Code',
-				name: 'bic',
-				type: 'string',
-				displayOptions: {
-					show: {
-						resource: ['utility'],
-						operation: ['validateBic', 'lookupBank'],
-					},
-				},
-				default: '',
-				placeholder: 'COBADEFFXXX',
-				description: 'The BIC/SWIFT code',
-			},
-
-			// Batch ID
-			{
-				displayName: 'Batch ID',
-				name: 'batchId',
-				type: 'string',
-				required: true,
-				displayOptions: {
-					show: {
-						resource: ['payment'],
-						operation: ['releaseBatch'],
-					},
-				},
-				default: '',
-				description: 'The payment batch ID',
-			},
-
-			// Additional options for various operations
-			{
-				displayName: 'Additional Fields',
-				name: 'additionalFields',
-				type: 'collection',
-				placeholder: 'Add Field',
-				default: {},
-				displayOptions: {
-					show: {
-						resource: ['bankAccount', 'entity', 'counterparty', 'payment'],
-						operation: ['create', 'update'],
-					},
-				},
-				options: [
-					{
-						displayName: 'Account Name',
-						name: 'accountName',
-						type: 'string',
-						default: '',
-						description: 'Name of the account',
-					},
-					{
-						displayName: 'Account Number',
-						name: 'accountNumber',
-						type: 'string',
-						default: '',
-						description: 'Bank account number',
-					},
-					{
-						displayName: 'Bank ID',
-						name: 'bankId',
-						type: 'string',
-						default: '',
-						description: 'Bank identifier',
-					},
-					{
-						displayName: 'IBAN',
-						name: 'iban',
-						type: 'string',
-						default: '',
-						description: 'International Bank Account Number',
-					},
-					{
-						displayName: 'BIC/SWIFT',
-						name: 'bic',
-						type: 'string',
-						default: '',
-						description: 'Bank Identifier Code',
-					},
-					{
-						displayName: 'Currency',
-						name: 'currency',
-						type: 'string',
-						default: 'USD',
-						description: 'Account currency',
-					},
-					{
-						displayName: 'Entity ID',
-						name: 'entityId',
-						type: 'string',
-						default: '',
-						description: 'Legal entity ID',
-					},
-					{
-						displayName: 'Account Type',
-						name: 'accountType',
-						type: 'options',
-						options: [
-							{ name: 'Operating', value: 'OPERATING' },
-							{ name: 'Concentration', value: 'CONCENTRATION' },
-							{ name: 'Payroll', value: 'PAYROLL' },
-							{ name: 'Investment', value: 'INVESTMENT' },
-							{ name: 'Escrow', value: 'ESCROW' },
-							{ name: 'ZBA', value: 'ZBA' },
-						],
-						default: 'OPERATING',
-						description: 'Type of bank account',
-					},
-					{
-						displayName: 'Status',
-						name: 'status',
-						type: 'options',
-						options: [
-							{ name: 'Active', value: 'ACTIVE' },
-							{ name: 'Inactive', value: 'INACTIVE' },
-							{ name: 'Pending', value: 'PENDING' },
-							{ name: 'Closed', value: 'CLOSED' },
-						],
-						default: 'ACTIVE',
-						description: 'Account status',
-					},
-					{
-						displayName: 'Description',
-						name: 'description',
-						type: 'string',
-						default: '',
-						description: 'Description or notes',
-					},
-					{
-						displayName: 'Tags',
-						name: 'tags',
-						type: 'string',
-						default: '',
-						description: 'Comma-separated tags',
-					},
-				],
-			},
-
-			// Payment creation fields
-			{
-				displayName: 'Payment Details',
-				name: 'paymentDetails',
-				type: 'collection',
-				placeholder: 'Add Field',
-				default: {},
-				displayOptions: {
-					show: {
-						resource: ['payment'],
-						operation: ['create'],
-					},
-				},
-				options: [
-					{
-						displayName: 'Payment Type',
-						name: 'paymentType',
-						type: 'options',
-						options: [
-							{ name: 'ACH', value: 'ACH' },
-							{ name: 'Wire', value: 'WIRE' },
-							{ name: 'RTP', value: 'RTP' },
-							{ name: 'FedNow', value: 'FEDNOW' },
-							{ name: 'Check', value: 'CHECK' },
-							{ name: 'Book Transfer', value: 'BOOK' },
-							{ name: 'International Wire', value: 'INTL_WIRE' },
-						],
-						default: 'ACH',
-						description: 'Type of payment',
-					},
-					{
-						displayName: 'Beneficiary Name',
-						name: 'beneficiaryName',
-						type: 'string',
-						default: '',
-						description: 'Name of the beneficiary',
-					},
-					{
-						displayName: 'Beneficiary Account',
-						name: 'beneficiaryAccount',
-						type: 'string',
-						default: '',
-						description: 'Beneficiary account number',
-					},
-					{
-						displayName: 'Beneficiary Bank',
-						name: 'beneficiaryBank',
-						type: 'string',
-						default: '',
-						description: 'Beneficiary bank routing/BIC',
-					},
-					{
-						displayName: 'Value Date',
-						name: 'valueDate',
-						type: 'dateTime',
-						default: '',
-						description: 'Payment value date',
-					},
-					{
-						displayName: 'Reference',
-						name: 'reference',
-						type: 'string',
-						default: '',
-						description: 'Payment reference',
-					},
-					{
-						displayName: 'Purpose',
-						name: 'purpose',
-						type: 'string',
-						default: '',
-						description: 'Payment purpose or remittance info',
-					},
-					{
-						displayName: 'Priority',
-						name: 'priority',
-						type: 'options',
-						options: [
-							{ name: 'Normal', value: 'NORMAL' },
-							{ name: 'High', value: 'HIGH' },
-							{ name: 'Urgent', value: 'URGENT' },
-						],
-						default: 'NORMAL',
-						description: 'Payment priority',
-					},
-				],
-			},
-
-			// Filters for list operations
-			{
-				displayName: 'Filters',
-				name: 'filters',
-				type: 'collection',
-				placeholder: 'Add Filter',
-				default: {},
-				displayOptions: {
-					show: {
-						operation: ['getMany', 'listTransactions', 'listDeals', 'listInvestments', 'listDebtInstruments', 'listInvoices', 'listUsers', 'listConnections'],
-					},
-				},
-				options: [
-					{
-						displayName: 'Status',
-						name: 'status',
-						type: 'string',
-						default: '',
-						description: 'Filter by status',
-					},
-					{
-						displayName: 'Currency',
-						name: 'currency',
-						type: 'string',
-						default: '',
-						description: 'Filter by currency',
-					},
-					{
-						displayName: 'Entity ID',
-						name: 'entityId',
-						type: 'string',
-						default: '',
-						description: 'Filter by entity',
-					},
-					{
-						displayName: 'Date From',
-						name: 'dateFrom',
-						type: 'dateTime',
-						default: '',
-						description: 'Filter from date',
-					},
-					{
-						displayName: 'Date To',
-						name: 'dateTo',
-						type: 'dateTime',
-						default: '',
-						description: 'Filter to date',
-					},
-					{
-						displayName: 'Search',
-						name: 'search',
-						type: 'string',
-						default: '',
-						description: 'Search term',
-					},
-				],
-			},
-
-			// Pagination options
-			{
-				displayName: 'Options',
-				name: 'options',
-				type: 'collection',
-				placeholder: 'Add Option',
-				default: {},
-				displayOptions: {
-					show: {
-						operation: ['getMany', 'listTransactions', 'listDeals', 'listInvestments', 'listDebtInstruments', 'listInvoices', 'listUsers', 'listConnections', 'getAuditLog', 'searchAuditLog', 'listReports'],
-					},
-				},
-				options: [
-					{
-						displayName: 'Limit',
-						name: 'limit',
-						type: 'number',
-						typeOptions: {
-							minValue: 1,
-							maxValue: 1000,
-						},
-						default: 50,
-						description: 'Maximum number of results',
-					},
-					{
-						displayName: 'Offset',
-						name: 'offset',
-						type: 'number',
-						default: 0,
-						description: 'Number of results to skip',
-					},
-					{
-						displayName: 'Sort By',
-						name: 'sortBy',
-						type: 'string',
-						default: '',
-						description: 'Field to sort by',
-					},
-					{
-						displayName: 'Sort Order',
-						name: 'sortOrder',
-						type: 'options',
-						options: [
-							{ name: 'Ascending', value: 'asc' },
-							{ name: 'Descending', value: 'desc' },
-						],
-						default: 'desc',
-						description: 'Sort order',
-					},
-				],
-			},
-
-			// Statement data for parsing
-			{
-				displayName: 'Statement Data',
-				name: 'statementData',
-				type: 'string',
-				typeOptions: {
-					rows: 10,
-				},
-				displayOptions: {
-					show: {
-						resource: ['bankConnectivity'],
-						operation: ['parseStatement'],
-					},
-				},
-				default: '',
-				description: 'Raw bank statement data to parse',
-			},
-
-			// File binary property
-			{
-				displayName: 'Binary Property',
-				name: 'binaryPropertyName',
-				type: 'string',
-				displayOptions: {
-					show: {
-						resource: ['bankConnectivity', 'cashForecasting', 'bankFeeAnalysis', 'reporting'],
-						operation: ['sendPaymentFile', 'importForecastData', 'importStatement', 'exportReport'],
-					},
-				},
-				default: 'data',
-				description: 'Name of the binary property containing the file',
-			},
-
-			// AI analysis type for GSmart
-			{
-				displayName: 'Analysis Type',
-				name: 'analysisType',
-				type: 'options',
-				displayOptions: {
-					show: {
-						resource: ['gsmartAi'],
-						operation: ['getInsights', 'getRecommendations'],
-					},
-				},
-				options: [
-					{ name: 'Cash Position', value: 'CASH_POSITION' },
-					{ name: 'Liquidity', value: 'LIQUIDITY' },
-					{ name: 'FX Exposure', value: 'FX_EXPOSURE' },
-					{ name: 'Investment', value: 'INVESTMENT' },
-					{ name: 'Risk', value: 'RISK' },
-					{ name: 'General', value: 'GENERAL' },
-				],
-				default: 'GENERAL',
-				description: 'Type of AI analysis',
-			},
-
-			// Rejection reason
-			{
-				displayName: 'Rejection Reason',
-				name: 'rejectionReason',
-				type: 'string',
-				displayOptions: {
-					show: {
-						resource: ['payment', 'workflow'],
-						operation: ['reject', 'rejectItem'],
-					},
-				},
-				default: '',
-				description: 'Reason for rejection',
-			},
-
-			// Approval comment
-			{
-				displayName: 'Comment',
-				name: 'comment',
-				type: 'string',
-				displayOptions: {
-					show: {
-						resource: ['payment', 'workflow'],
-						operation: ['approve', 'reject', 'approveItem', 'rejectItem'],
-					},
-				},
-				default: '',
-				description: 'Approval or rejection comment',
-			},
-		],
-	};
-
-	async execute(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {
-		const items = this.getInputData();
-		const returnData: INodeExecutionData[] = [];
-		const resource = this.getNodeParameter('resource', 0) as string;
-		const operation = this.getNodeParameter('operation', 0) as string;
-
-		for (let i = 0; i < items.length; i++) {
-			try {
-				let responseData: IDataObject | IDataObject[] = {};
-
-				switch (resource) {
-					case 'cashManagement':
-						responseData = await cashManagement.execute.call(this, i, operation);
-						break;
-					case 'bankAccount':
-						responseData = await bankAccount.execute.call(this, i, operation);
-						break;
-					case 'bankConnectivity':
-						responseData = await bankConnectivity.execute.call(this, i, operation);
-						break;
-					case 'payment':
-						responseData = await payment.execute.call(this, i, operation);
-						break;
-					case 'cashForecasting':
-						responseData = await cashForecasting.execute.call(this, i, operation);
-						break;
-					case 'investment':
-						responseData = await investment.execute.call(this, i, operation);
-						break;
-					case 'debt':
-						responseData = await debt.execute.call(this, i, operation);
-						break;
-					case 'fx':
-						responseData = await fx.execute.call(this, i, operation);
-						break;
-					case 'intercompany':
-						responseData = await intercompany.execute.call(this, i, operation);
-						break;
-					case 'erpIntegration':
-						responseData = await erpIntegration.execute.call(this, i, operation);
-						break;
-					case 'bankFeeAnalysis':
-						responseData = await bankFeeAnalysis.execute.call(this, i, operation);
-						break;
-					case 'entity':
-						responseData = await entity.execute.call(this, i, operation);
-						break;
-					case 'counterparty':
-						responseData = await counterparty.execute.call(this, i, operation);
-						break;
-					case 'reporting':
-						responseData = await reporting.execute.call(this, i, operation);
-						break;
-					case 'workflow':
-						responseData = await workflow.execute.call(this, i, operation);
-						break;
-					case 'userManagement':
-						responseData = await userManagement.execute.call(this, i, operation);
-						break;
-					case 'audit':
-						responseData = await audit.execute.call(this, i, operation);
-						break;
-					case 'marketData':
-						responseData = await marketData.execute.call(this, i, operation);
-						break;
-					case 'riskManagement':
-						responseData = await riskManagement.execute.call(this, i, operation);
-						break;
-					case 'gsmartAi':
-						responseData = await gsmartAi.execute.call(this, i, operation);
-						break;
-					case 'utility':
-						responseData = await utility.execute.call(this, i, operation);
-						break;
-					default:
-						throw new NodeOperationError(this.getNode(), `Unknown resource: ${resource}`);
-				}
-
-				const executionData = this.helpers.constructExecutionMetaData(
-					this.helpers.returnJsonArray(responseData),
-					{ itemData: { item: i } },
-				);
-				returnData.push(...executionData);
-			} catch (error) {
-				if (this.continueOnFail()) {
-					const executionData = this.helpers.constructExecutionMetaData(
-						this.helpers.returnJsonArray({ error: (error as Error).message }),
-						{ itemData: { item: i } },
-					);
-					returnData.push(...executionData);
-					continue;
-				}
-				throw error;
-			}
-		}
-
-		return [returnData];
-	}
-}
+						resource: ['foreignExchange'],
+						operation: ['
